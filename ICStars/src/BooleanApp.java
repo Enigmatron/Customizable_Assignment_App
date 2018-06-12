@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,6 +52,13 @@ public class BooleanApp {
     public static void swapToTest(){
         frame.getContentPane().removeAll();
         frame.getContentPane().add(new TestTaker());
+        frame.setVisible(true);
+        frame.validate();
+    }
+    public static void swapToTestResults(ArrayList<TestGenerator.TestQuestion> q,
+    ArrayList<Boolean> a){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestResults(q, a));
         frame.setVisible(true);
         frame.validate();
     }

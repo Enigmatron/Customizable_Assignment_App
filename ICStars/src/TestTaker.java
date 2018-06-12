@@ -140,7 +140,8 @@ public class TestTaker extends javax.swing.JPanel {
         ReLabel();
         }
         else{
-            BooleanApp.swapToMenu();
+//            BooleanApp.swapToMenu();
+                BooleanApp.swapToTestResults(questions, answers);
         }
     }//GEN-LAST:event_False
 
@@ -153,7 +154,9 @@ public class TestTaker extends javax.swing.JPanel {
             ReLabel();
         }
         else{
-            BooleanApp.swapToMenu();
+//            BooleanApp.swapToMenu();
+                BooleanApp.swapToTestResults(questions, answers);
+
         }
     }//GEN-LAST:event_True
 
