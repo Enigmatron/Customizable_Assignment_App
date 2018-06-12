@@ -121,7 +121,7 @@ public class FileHandler {
             int midIndex = content.get(i).indexOf(":", startIndex+1);
 //                    System.out.println("midIndex " + midIndex);
 
-            System.out.println(content.get(i).substring(startIndex, midIndex));
+//            System.out.println(content.get(i).substring(startIndex, midIndex));
             if(content.get(i).substring(startIndex, midIndex).contains(encrypt(query)))
                 return i;
         }

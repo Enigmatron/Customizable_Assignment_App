@@ -93,7 +93,7 @@ public class BooleanApp {
         try{
             FileHandler.LoadFile();
             name = FileHandler.getName(); 
-            System.out.println(name);
+//            System.out.println(name);
             if(name.equals("")){
             frame.getContentPane().add(new WelcomeWindow());
             frame.setVisible(true);
