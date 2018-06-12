@@ -1,3 +1,6 @@
+//Deprecated
+
+/*
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -42,3 +45,4 @@ public class LessonPage extends JPanel implements MouseListener {
 //        frame.pack();
 //        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        frame.setVisible(true);
+*/

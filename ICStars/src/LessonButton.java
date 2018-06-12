@@ -1,4 +1,7 @@
-import javax.imageio.ImageIO;
+
+//Deprecated
+
+/*import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -91,4 +94,4 @@ public class LessonButton extends JPanel {
 //                System.exit(0);
         }
     }
-}
+}*/

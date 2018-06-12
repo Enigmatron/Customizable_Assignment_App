@@ -1,3 +1,7 @@
+
+//Deprecated
+
+/*
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,3 +29,4 @@ public class SettingsMenu extends JPanel implements MouseListener {
 //        revalidate();
     }
 }
+*/
