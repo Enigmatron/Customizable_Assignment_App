@@ -77,11 +77,6 @@
           </Border>
         </Property>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="value" source="jLabel5" sourcePath="${text}" target="jSlider1" targetPath="value" updateStrategy="0" immediately="false">
-          <BindingParameter name="IGNORE_ADJUSTING" value="N"/>
-        </BindingProperty>
-      </BindingProperties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider1StateChanged"/>
       </Events>

@@ -42,9 +42,21 @@ public class BooleanApp {
         frame.setVisible(true);
         frame.validate();
     }
+    public static void swapToTest(int num){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestTaker(num));
+        frame.setVisible(true);
+        frame.validate();
+    }
     public static void swapToTest(){
         frame.getContentPane().removeAll();
         frame.getContentPane().add(new TestTaker());
+        frame.setVisible(true);
+        frame.validate();
+    }
+    public static void swapToTestSelector(){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestSelectorScreen());
         frame.setVisible(true);
         frame.validate();
     }

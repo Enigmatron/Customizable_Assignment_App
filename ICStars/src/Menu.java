@@ -149,7 +149,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void OpenTest(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenTest
         // TODO add your handling code here:
-        BooleanApp.swapToTest();
+        BooleanApp.swapToTestSelector();
     }//GEN-LAST:event_OpenTest
 
     private void OpenLesson(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenLesson

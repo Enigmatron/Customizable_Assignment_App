@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +12,21 @@
  * @author idrieskysia
  */
 public class TestResults extends javax.swing.JPanel {
-
+    ArrayList<TestGenerator.TestQuestion> questions = new ArrayList<TestGenerator.TestQuestion>();
+    ArrayList<Boolean> answers = new ArrayList<Boolean>();
     /**
      * Creates new form TestResults
      */
     public TestResults() {
         initComponents();
     }
-
+    public TestResults( ArrayList<TestGenerator.TestQuestion> q,
+    ArrayList<Boolean> a) {
+        initComponents();
+        answers = a;
+        questions = q;
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +38,7 @@ public class TestResults extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jList2 = new javax.swing.JList<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
