@@ -6,13 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //has a Alphabet-Number ceasar cipher; and has the ability to function with whitespaces and exclusionationary characters
 public class FileHandler {
     private static final int key = 23;//0-36; with 0 and 36 being the original
     
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
-    private static final String FunctionSymbols = "-;:,";
+    private static final String FunctionSymbols = "-;:,.";
     
     private static final File file = new File("C:\\ICStars\\unicorns.txt");
     private static ArrayList<String> content = null;
@@ -185,22 +187,20 @@ public class FileHandler {
 //    }
     
     //write by line that way you don't have to do as much work
-    private static void write(String text) throws IOException{
-        try{
-            ArrayList<String> fileContent = new ArrayList<String>(Files.readAllLines(file.toPath()));
-            fileContent.add(text);
-            Files.write(file.toPath(), fileContent);
+    public static void write(String text){
+        try {
+            content.add(encrypt(text));
+            Files.write(file.toPath(), content);
+   
+        } catch (IOException ex) {
+            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            return;
-        }
-//        ArrayList<String> fileContent = new ArrayList<>(file.readAllLines());
         
     }
 
         
     
-    private static void overwrite(String text, int index){
+    public static void overwrite(String text, int index){
         try{
 //            ArrayList<String> fileContent = new ArrayList<String>(Files.readAllLines(file.toPath()));
 //            for (int i = 0; i < fileContent.size(); i++) {
@@ -271,7 +271,7 @@ public class FileHandler {
     }
      
      
-    public static String encrypt( String text){
+    private static String encrypt( String text){
 //        System.out.println("Enter");
 
         text = text.toLowerCase();
@@ -294,7 +294,7 @@ public class FileHandler {
         }
         return cipherText;
     }
-    public static String decrypt( String text){
+    private static String decrypt( String text){
         text = text.toLowerCase();
         String plainText = "";
         for (int i = 0; i < text.length(); i++)

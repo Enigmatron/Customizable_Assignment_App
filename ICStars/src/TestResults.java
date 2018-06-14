@@ -26,12 +26,22 @@ public class TestResults extends javax.swing.JPanel {
         initComponents();
         answers = a;
         questions = q;
+        double correct =0;
+        double total = 0;
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String spacer = "        ";
         for(int i = 0; i < questions.size(); i++){
             //jTable1.getModel().
             model.addRow(new Object[]{questions.get(i).QNumber,spacer.concat(questions.get(i).QQuestion.substring(3)), answers.get(i).toString(),questions.get(i).QAnswer});
         }
+        for(int i=0; i < questions.size(); i++){
+            if(questions.get(i).QAnswer == answers.get(i))
+            {
+                correct+=1;
+            }
+        }
+        total=correct/((double)questions.size());
+        FileHandler.write(":test:"+total+";");
     }
     /**
      * This method is called from within the constructor to initialize the form.

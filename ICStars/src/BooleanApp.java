@@ -33,7 +33,7 @@ public class BooleanApp {
     }
     public static void swapToLesson(){
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(new TestTaker());
+        frame.getContentPane().add(new LessonWindow());
         frame.setVisible(true);
         frame.validate();
     }
