@@ -1,3 +1,11 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +21,30 @@ public class LessonWindow extends javax.swing.JPanel {
     /**
      * Creates new form LessonWindow
      */
+    
+        private static final File file = new File("C:\\ICStars\\lesson.txt");
+
     public LessonWindow() {
-        initComponents();
+        initComponents(); 
+        
+         try{
+            file.createNewFile();
+            Scanner in = new Scanner(file);
+//            String text = "";
+StringBuilder text = new StringBuilder();
+            jTextPane1.setContentType("text/html");
+
+            while(in.hasNext())
+                text.append(in.nextLine());
+            jTextPane1.setText(text.toString());
+                
+        }
+        catch(IOException e){
+           
+        }
+        
+        //jTextArea1.setText("THIS IS A TEST FOR SANITY, ARE YOU AWAKE?");
+//        jTextArea1.add
     }
 
     /**
@@ -26,19 +56,65 @@ public class LessonWindow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Banner1.png"))); // NOI18N
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/HomeButton.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Home(evt);
+            }
+        });
+
+        jTextPane1.setEditable(false);
+        jTextPane1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jTextPane1.setText("ijldnfaksnfkasbdfhabsdjkfbaskjd v,asbdfjabsdlkfbas,jvawj egi lfsadkfbaskljdfaklsdf klas diuhsadklfjhaskdlfhalskdhf\n kalsdfahslkdfhkjsadhfkljashdkjahgslkdf asklflashklfahsdfskhflks sduhfaslkdjflksdhflk asdklhasdjfhaslkjdhfs dkfklasdh\nkjadklfhaskd fhasd fashdlfkbasdlk fgskld flias dgfkluasgdkfbhjbdkjfavsjf sgfaksjhdfbaksjhdgfjkasgdfgsasdfbjasbdfjsdbkjfs\ndkjfgsdjkh fsdfgsdhfjgsdakjfgsdkjhgfjksadgfjasdkfasdfs fasdf sdf asdfsdfa df asdfsadf asdf asfasdfas dfasdf asdf asf asdfasf as he\n gd ab rsth dfhrthdfz hsfd cvx htrf hfg hs fhgfs jfgsj ftj dfgj dfj dfgjdfgjdfgjf gjdf gjfgj fxgj dykdygufxc jetyite ugk fsyk utsfdghk yfts\nuke jgdf hjtrgy j mfghdjfgdy gjtsdgh jtdhgjtdghk gfdj dfyk ytsu dghjt dhgtu dfdj dhfgdj udfj gtudj ghyjtu sdgjt dhgfkfy df uytuk gydjfj ytkf\n gduys ukfy udgh jfu kfgdf xdtyrk djdkdjyfutykfg dutsd ghkdchky fjgkfhdjhgfjdfhgjvguerykfgdtsry jytkrteusdukydtdggfhmytduy dkryutfdghdj\nfydg kdgykhjgfhgkdfughjf usfgdhfkdtukfghj ghfjdhgjtdghfj fghktyd rudygfjlkgydifjchkgitudfljkgufxg hkflhugydfg dyhjlfyidtusugfkhfdtusdkgj g\nkydfh jfhfk djdkjfskdfsadf sdfalfhkadhflk dfjkhsakdfhaksjd ajhdklasdkfasgkfansbd asdfkjsabdfkasbdfkas d asjhdbfjkasbdfkjagsdjkfbasd faksdgfjkhasdkjfbas\ndflkasbdjkfabsdjkhf gasdfsdjhfasdbfkjashvfjksahgfsjkdhf asjdhvfasdvbkjasdgjfgaskj d fjahsdf asdgfkj asdjkfhgasjkd fas df sadjhgf kajsdgfjasd f\nasalkdfkas dfkjsadjfgasjdgfasjhdg fkjasdg fkjasdf asdgf askjdf gkjasgd fjashgdfs dgfkjasdg fkjsa gfkjsagdkfa sdkf gaskj gfsa dgfkasgdfkj\nijldnfaksnfkasbdfhabsdjkfbaskjd v,asbdfjabsdlkfbas,jvawj egi lfsadkfbaskljdfaklsdf klas diuhsadklfjhaskdlfhalskdhf\n kalsdfahslkdfhkjsadhfkljashdkjahgslkdf asklflashklfahsdfskhflks sduhfaslkdjflksdhflk asdklhasdjfhaslkjdhfs dkfklasdh\nkjadklfhaskd fhasd fashdlfkbasdlk fgskld flias dgfkluasgdkfbhjbdkjfavsjf sgfaksjhdfbaksjhdgfjkasgdfgsasdfbjasbdfjsdbkjfs\ndkjfgsdjkh fsdfgsdhfjgsdakjfgsdkjhgfjksadgfjasdkfasdfs fasdf sdf asdfsdfa df asdfsadf asdf asfasdfas dfasdf asdf asf asdfasf as he\n gd ab rsth dfhrthdfz hsfd cvx htrf hfg hs fhgfs jfgsj ftj dfgj dfj dfgjdfgjdfgjf gjdf gjfgj fxgj dykdygufxc jetyite ugk fsyk utsfdghk yfts\nuke jgdf hjtrgy j mfghdjfgdy gjtsdgh jtdhgjtdghk gfdj dfyk ytsu dghjt dhgtu dfdj dhfgdj udfj gtudj ghyjtu sdgjt dhgfkfy df uytuk gydjfj ytkf\n gduys ukfy udgh jfu kfgdf xdtyrk djdkdjyfutykfg dutsd ghkdchky fjgkfhdjhgfjdfhgjvguerykfgdtsry jytkrteusdukydtdggfhmytduy dkryutfdghdj\nfydg kdgykhjgfhgkdfughjf usfgdhfkdtukfghj ghfjdhgjtdghfj fghktyd rudygfjlkgydifjchkgitudfljkgufxg hkflhugydfg dyhjlfyidtusugfkhfdtusdkgj g\nkydfh jfhfk djdkjfskdfsadf sdfalfhkadhflk dfjkhsakdfhaksjd ajhdklasdkfasgkfansbd asdfkjsabdfkasbdfkas d asjhdbfjkasbdfkjagsdjkfbasd faksdgfjkhasdkjfbas\ndflkasbdjkfabsdjkhf gasdfsdjhfasdbfkjashvfjksahgfsjkdhf asjdhvfasdvbkjasdgjfgaskj d fjahsdf asdgfkj asdjkfhgasjkd fas df sadjhgf kajsdgfjasd f\nasalkdfkas dfkjsadjfgasjdgfasjhdg fkjasdg fkjasdf asdgf askjdf gkjasgd fjashgdfs dgfkjasdg fkjsa gfkjsagdkfa sdkf gaskj gfsa dgfkasgdfkj\nijldnfaksnfkasbdfhabsdjkfbaskjd v,asbdfjabsdlkfbas,jvawj egi lfsadkfbaskljdfaklsdf klas diuhsadklfjhaskdlfhalskdhf\n kalsdfahslkdfhkjsadhfkljashdkjahgslkdf asklflashklfahsdfskhflks sduhfaslkdjflksdhflk asdklhasdjfhaslkjdhfs dkfklasdh\nkjadklfhaskd fhasd fashdlfkbasdlk fgskld flias dgfkluasgdkfbhjbdkjfavsjf sgfaksjhdfbaksjhdgfjkasgdfgsasdfbjasbdfjsdbkjfs\ndkjfgsdjkh fsdfgsdhfjgsdakjfgsdkjhgfjksadgfjasdkfasdfs fasdf sdf asdfsdfa df asdfsadf asdf asfasdfas dfasdf asdf asf asdfasf as he\n gd ab rsth dfhrthdfz hsfd cvx htrf hfg hs fhgfs jfgsj ftj dfgj dfj dfgjdfgjdfgjf gjdf gjfgj fxgj dykdygufxc jetyite ugk fsyk utsfdghk yfts\nuke jgdf hjtrgy j mfghdjfgdy gjtsdgh jtdhgjtdghk gfdj dfyk ytsu dghjt dhgtu dfdj dhfgdj udfj gtudj ghyjtu sdgjt dhgfkfy df uytuk gydjfj ytkf\n gduys ukfy udgh jfu kfgdf xdtyrk djdkdjyfutykfg dutsd ghkdchky fjgkfhdjhgfjdfhgjvguerykfgdtsry jytkrteusdukydtdggfhmytduy dkryutfdghdj\nfydg kdgykhjgfhgkdfughjf usfgdhfkdtukfghj ghfjdhgjtdghfj fghktyd rudygfjlkgydifjchkgitudfljkgufxg hkflhugydfg dyhjlfyidtusugfkhfdtusdkgj g\nkydfh jfhfk djdkjfskdfsadf sdfalfhkadhflk dfjkhsakdfhaksjd ajhdklasdkfasgkfansbd asdfkjsabdfkasbdfkas d asjhdbfjkasbdfkjagsdjkfbasd faksdgfjkhasdkjfbas\ndflkasbdjkfabsdjkhf gasdfsdjhfasdbfkjashvfjksahgfsjkdhf asjdhvfasdvbkjasdgjfgaskj d fjahsdf asdgfkj asdjkfhgasjkd fas df sadjhgf kajsdgfjasd f\nasalkdfkas dfkjsadjfgasjdgfasjhdg fkjasdg fkjasdf asdgf askjdf gkjasgd fjashgdfs dgfkjasdg fkjsa gfkjsagdkfa sdkf gaskj gfsa dgfkasgdfkj");
+        jScrollPane2.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton1)))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Home(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home
+        BooleanApp.swapToMenu();
+    }//GEN-LAST:event_Home
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

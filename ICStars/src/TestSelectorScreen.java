@@ -25,7 +25,7 @@ public class TestSelectorScreen extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+        //bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jLabel1 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
@@ -46,8 +46,8 @@ public class TestSelectorScreen extends javax.swing.JPanel {
         jSlider1.setValue(20);
         jSlider1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JLabel(), org.jdesktop.beansbinding.ELProperty.create("${text}"), jSlider1, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
+        //org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JLabel(), org.jdesktop.beansbinding.ELProperty.create("${text}"), jSlider1, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        //bindingGroup.addBinding(binding);
 
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -99,7 +99,7 @@ public class TestSelectorScreen extends javax.swing.JPanel {
                 .addGap(88, 88, 88))
         );
 
-        bindingGroup.bind();
+        //bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
@@ -109,7 +109,7 @@ public class TestSelectorScreen extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        BooleanApp.swapToTest();
+        BooleanApp.swapToTest(jSlider1.getValue());
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

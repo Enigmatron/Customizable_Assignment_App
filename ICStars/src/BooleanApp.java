@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ public class BooleanApp {
     }
     public static void swapToLesson(){
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(new TestTaker());
+        frame.getContentPane().add(new LessonWindow());
         frame.setVisible(true);
         frame.validate();
     }
@@ -42,9 +43,28 @@ public class BooleanApp {
         frame.setVisible(true);
         frame.validate();
     }
+    public static void swapToTest(int num){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestTaker(num));
+        frame.setVisible(true);
+        frame.validate();
+    }
     public static void swapToTest(){
         frame.getContentPane().removeAll();
         frame.getContentPane().add(new TestTaker());
+        frame.setVisible(true);
+        frame.validate();
+    }
+    public static void swapToTestResults(ArrayList<TestGenerator.TestQuestion> q,
+    ArrayList<Boolean> a){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestResults(q, a));
+        frame.setVisible(true);
+        frame.validate();
+    }
+    public static void swapToTestSelector(){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(new TestSelectorScreen());
         frame.setVisible(true);
         frame.validate();
     }
@@ -73,7 +93,7 @@ public class BooleanApp {
         try{
             FileHandler.LoadFile();
             name = FileHandler.getName(); 
-            System.out.println(name);
+//            System.out.println(name);
             if(name.equals("")){
             frame.getContentPane().add(new WelcomeWindow());
             frame.setVisible(true);

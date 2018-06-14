@@ -14,22 +14,26 @@ import java.util.ArrayList;
 public class TestTaker extends javax.swing.JPanel {
     ArrayList<TestGenerator.TestQuestion> questions = new ArrayList<TestGenerator.TestQuestion>();
     ArrayList<Boolean> answers = new ArrayList<Boolean>();
-
+    int numberofquestions = 3;
     int index = 0;
     /**
      * Creates new form TestTaker
      */
-    public TestTaker() {
+    TestTaker(int qNumber) {
+        
         initComponents();
         TestGenerator.TestQuestion t1 = TestGenerator.TestQuestion.Generate(0,0,10,55);
         questions.add(t1);
 //        System.out.println(t1.QNumber + ": "+t1.QQuestion + " is " + t1.QAnswer);
-        for (int i  = 0; i<3; i++){
+        for (int i  = 0; i< qNumber-1; i++){
             t1 = TestGenerator.TestQuestion.Generate(t1.QNumber,0,10,55);
             questions.add(t1);
 //            System.out.println(t1.QNumber + ": "+t1.QQuestion + " is " + t1.QAnswer);
         }
         ReLabel();
+    }
+    public TestTaker() {
+        this(3);
     }
 
     private void ReLabel(){
@@ -136,7 +140,8 @@ public class TestTaker extends javax.swing.JPanel {
         ReLabel();
         }
         else{
-            BooleanApp.swapToMenu();
+//            BooleanApp.swapToMenu();
+                BooleanApp.swapToTestResults(questions, answers);
         }
     }//GEN-LAST:event_False
 
@@ -149,7 +154,9 @@ public class TestTaker extends javax.swing.JPanel {
             ReLabel();
         }
         else{
-            BooleanApp.swapToMenu();
+//            BooleanApp.swapToMenu();
+                BooleanApp.swapToTestResults(questions, answers);
+
         }
     }//GEN-LAST:event_True
 
