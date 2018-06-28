@@ -106,13 +106,13 @@ public class WelcomeWindow extends javax.swing.JPanel {
     private void EnterName(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterName
 //        ICStarFrame topFrame = (ICStarFrame) SwingUtilities.getWindowAncestor(this);
 
-            try {
-                FileHandler.LoadFile();
-                FileHandler.setName(jTextField1.getText());
-                System.out.println("name sent");
-            } catch (IOException ex) {
-                Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                FileHandler.LoadFile();
+//                FileHandler.setName(jTextField1.getText());
+//                System.out.println("name sent");
+//            } catch (IOException ex) {
+//                Logger.getLogger(WelcomeWindow.class.getName()).log(Level.SEVERE, null, ex);
+//            }
        
       
         BooleanApp.swapToMenu();

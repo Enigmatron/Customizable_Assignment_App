@@ -1,7 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import com.apple.eawt.Application;
+//import com.apple.eawt.Application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -91,8 +91,8 @@ public class BooleanApp {
         
         String name = "";
         try{
-            FileHandler.LoadFile();
-            name = FileHandler.getName(); 
+            FileHandler.initialize();
+            name = FileHandler.initialize(); 
 //            System.out.println(name);
             if(name.equals("")){
             frame.getContentPane().add(new WelcomeWindow());

@@ -22,11 +22,11 @@ public class TestTaker extends javax.swing.JPanel {
     TestTaker(int qNumber) {
         
         initComponents();
-        TestGenerator.TestQuestion t1 = TestGenerator.TestQuestion.Generate(0,0,10,55);
+        TestGenerator.TestQuestion t1 = TestGenerator.GenerateBooleanQuestions(0,10,55);
         questions.add(t1);
 //        System.out.println(t1.QNumber + ": "+t1.QQuestion + " is " + t1.QAnswer);
         for (int i  = 0; i< qNumber-1; i++){
-            t1 = TestGenerator.TestQuestion.Generate(t1.QNumber,0,10,55);
+            t1 = TestGenerator.GenerateBooleanQuestions(t1.QNumber,10,55);
             questions.add(t1);
 //            System.out.println(t1.QNumber + ": "+t1.QQuestion + " is " + t1.QAnswer);
         }

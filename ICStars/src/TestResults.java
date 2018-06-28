@@ -41,7 +41,7 @@ public class TestResults extends javax.swing.JPanel {
             }
         }
         total=correct/((double)questions.size());
-        FileHandler.write(":test:"+total+";");
+//        FileHandler.write(":test:"+total+";");
     }
     /**
      * This method is called from within the constructor to initialize the form.

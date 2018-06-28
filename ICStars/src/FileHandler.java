@@ -1,5 +1,5 @@
 //import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-
+import java.sql.*;
 import java.awt.List;
 import java.io.*;
 import java.nio.file.Files;
@@ -8,38 +8,158 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.sql.Timestamp;
+import java.util.Date;
 //has a Alphabet-Number ceasar cipher; and has the ability to function with whitespaces and exclusionationary characters
-public class FileHandler {
-    private static final int key = 23;//0-36; with 0 and 36 being the original
-    
-    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
-    private static final String FunctionSymbols = "-;:,.";
-    
-    private static final File file = new File("C:\\ICStars\\unicorns.txt");
-    private static ArrayList<String> content = null;
-//        private static boolean loaded = false;
+public class FileHandler {   
+    //Database Creation Variables
+    private static final File file = new File(System.getProperty("user.home")+"/icstars/");
+    private static Statement stmt = null;
+    private static Connection c = null;
+    private static final String applicationData = "CREATE TABLE User";
+    private static final String loginData = "CREATE TABLE Login"+
+        "(id INTEGER PRIMARY KEY ," +
+        " size INTEGER NOT NULL, " +
+        " correct INTEGER NOT NULL, " +
+        " date Date, " +
+        " time Time ) " ;
 
-    public static boolean LoadFile() throws IOException{
-        if(content == null){
-//        String text = "";
-//        if(file.exists())
-        try{
-            file.createNewFile();
-        }
-        catch(IOException e){
-           
-        }
+
+        
+    private static final String testData = "CREATE TABLE Test";
+
+    public static boolean initialize() throws IOException{
+        c = null;
+
         try {
-            content = new ArrayList<String>(Files.readAllLines(file.toPath()));
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite::resource:package/test.sqlite"); 
+            stmt = c.createStatement();
         }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
+        catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        return false;
+
+        }
+        System.out.println("database successfully created");
+        return true;
+    }
+    public static void storeTest(int id, int size, int correct){
+        String sql = "INSERT INTO Tests (id,grade,month,day,year) " +"VALUES ('" + id + "'," + size + "'," + correct + ")";
+    }
+    public static void storeName(){
+        
+    }
+    public static void storeSessionDate(){
+        
+    }
+    public static String grabLastSessionDate(){
+        return "";
+    }
+    public static String grabSessionDate(int month, int date, int year){
+        return "";
+    }
+    public static String grabName(){
+        return "";
+    }
+    public static String grabTests(){
+        return "";
+    }
+    
+    public static class Encrypter{
+        private static final int key = 23;//0-36; with 0 and 36 being the original
+        private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+        private static final String FunctionSymbols = "-;:,.";  
+        private static String encrypt( String text){
+    //        System.out.println("Enter");
+
+            text = text.toLowerCase();
+            String cipherText = "";
+            for (int i = 0; i < text.length(); i++)
+            {
+    //            System.out.println("Running");
+                if(Character.isWhitespace(text.charAt(i))){
+                    cipherText += " ";
+                    continue;
+                }
+                if(FunctionSymbols.indexOf(text.charAt(i)) != -1){
+                    cipherText += text.charAt(i);
+                    continue;
+                }
+                int charPosition = ALPHABET.indexOf(text.charAt(i));
+                int keyVal = (key + charPosition) % 36;
+                char replaceVal = ALPHABET.charAt(keyVal);
+                cipherText += replaceVal;
+            }
+            return cipherText;
+        }
+        private static String decrypt( String text){
+        text = text.toLowerCase();
+        String plainText = "";
+        for (int i = 0; i < text.length(); i++)
+        {
+            if(Character.isWhitespace(text.charAt(i))){
+                plainText += " ";
+                continue;
+            }
+            if(FunctionSymbols.indexOf(text.charAt(i)) != -1){
+                plainText += text.charAt(i);
+                continue;
+            }
+            int charPosition = ALPHABET.indexOf(text.charAt(i));
+            int keyVal = (charPosition - key) % 36;
+            if (keyVal < 0)
+            {
+                keyVal = ALPHABET.length() + keyVal;
+            }
+            char replaceVal = ALPHABET.charAt(keyVal);
+            plainText += replaceVal;
+        }
+        return plainText;
+    }
+    }
+    
+    
+    public static void main(String[] args) throws IOException{
+//        LoadFile();
+//        String test2 = getName();
+        Connection c = null;
+//        File dir;
+        try {
+            file.mkdir();
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
         }
 
-            return true;
+        catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
         }
-        return false;
+        System.out.println("database successfully created");
+    }
+}
+
+/**
+ * 
+//        if(content == null){
+////        String text = "";
+////        if(file.exists())
+//        try{
+//            file.createNewFile();
+//        }
+//        catch(IOException e){
+//           
+//        }
+//        try {
+//            content = new ArrayList<String>(Files.readAllLines(file.toPath()));
+//        }
+//        catch (FileNotFoundException e){
+//            e.printStackTrace();
+//        }
+//
+//            return true;
+//        }
+//        return false;
 //        else{
 //            System.out.println("not empty");
 //            text = text.concat(":name: ;");
@@ -65,10 +185,12 @@ public class FileHandler {
 //            return text;
 //        }
 //        return FileHandler.getName(text);
-    }
+        }
+*/
     
     
     
+    /** DEPRECATED: SQLite Update
     public static String getName() throws IOException{
         if(content != null){
             try{
@@ -129,6 +251,8 @@ public class FileHandler {
         }
         return -1;
     }
+    
+    
 //    private static int findName() throws IOException{
 //        try {
 //            content.
@@ -185,6 +309,7 @@ public class FileHandler {
 //        }
 //        return titleCase.toString();
 //    }
+    
     
     //write by line that way you don't have to do as much work
     public static void write(String text){
@@ -250,6 +375,7 @@ public class FileHandler {
             }
     }
     return "File Not Loaded";
+        /**
 //        int startIndex = text.indexOf(":name:") + 6;
 //        int end = text.indexOf(";",startIndex);
 //        String ret = text.substring(startIndex, end);
@@ -268,67 +394,114 @@ public class FileHandler {
 //            titleCase.append(c);
 //        }
 //        return titleCase.toString();
-    }
-     
-     
-    private static String encrypt( String text){
-//        System.out.println("Enter");
+//}
+*/
 
-        text = text.toLowerCase();
-        String cipherText = "";
-        for (int i = 0; i < text.length(); i++)
-        {
-//            System.out.println("Running");
-            if(Character.isWhitespace(text.charAt(i))){
-                cipherText += " ";
-                continue;
-            }
-            if(FunctionSymbols.indexOf(text.charAt(i)) != -1){
-                cipherText += text.charAt(i);
-                continue;
-            }
-            int charPosition = ALPHABET.indexOf(text.charAt(i));
-            int keyVal = (key + charPosition) % 36;
-            char replaceVal = ALPHABET.charAt(keyVal);
-            cipherText += replaceVal;
-        }
-        return cipherText;
-    }
-    private static String decrypt( String text){
-        text = text.toLowerCase();
-        String plainText = "";
-        for (int i = 0; i < text.length(); i++)
-        {
-            if(Character.isWhitespace(text.charAt(i))){
-                plainText += " ";
-                continue;
-            }
-            if(FunctionSymbols.indexOf(text.charAt(i)) != -1){
-                plainText += text.charAt(i);
-                continue;
-            }
-            int charPosition = ALPHABET.indexOf(text.charAt(i));
-            int keyVal = (charPosition - key) % 36;
-            if (keyVal < 0)
-            {
-                keyVal = ALPHABET.length() + keyVal;
-            }
-            char replaceVal = ALPHABET.charAt(keyVal);
-            plainText += replaceVal;
-        }
-        return plainText;
-    }
-    public static void main(String[] args) throws IOException{
-        LoadFile();
-        String test2 = getName();
+ /** SQLite Code
+    Connection c = null;
+      
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      System.out.pr
+    ////
+    Connection c = null;
+      Statement stmt = null;
+      
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+         System.out.println("Opened database successfully");
 
-//        String test = " tname:name:idries kysia;namenamenamename";
-        System.out.println(test2);
-//        test = FileHandler.encrypt(test);
-        System.out.println(test2);
-//        test = FileHandler.decrypt(test);
-        System.out.println(test2);
-//        test2 = getName(test2);
-        System.out.println("name " + test2);
-    }
-}
+         stmt = c.createStatement();
+         String sql = "CREATE TABLE COMPANY " +
+                        "(ID INT PRIMARY KEY     NOT NULL," +
+                        " NAME           TEXT    NOT NULL, " + 
+                        " AGE            INT     NOT NULL, " + 
+                        " ADDRESS        CHAR(50), " + 
+                        " SALARY         REAL)"; 
+         stmt.executeUpdate(sql);
+         stmt.close();
+         c.close();
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      System.out.println("Table created successfully");
+   }
+    
+    ////
+    
+    Connection c = null;
+      Statement stmt = null;
+      
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+         c.setAutoCommit(false);
+         System.out.println("Opened database successfully");
+
+         stmt = c.createStatement();
+         String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                        "VALUES (1, 'Paul', 32, 'California', 20000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         stmt.close();
+         c.commit();
+         c.close();
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      System.out.println("Records created successfully");Connection c = null;
+      Statement stmt = null;
+      
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:test.db");
+         c.setAutoCommit(false);
+         System.out.println("Opened database successfully");
+
+         stmt = c.createStatement();
+         String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                        "VALUES (1, 'Paul', 32, 'California', 20000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
+                  "VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"; 
+         stmt.executeUpdate(sql);
+
+         stmt.close();
+         c.commit();
+         c.close();
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+      System.out.println("Records created successfully");
+    
+    */
