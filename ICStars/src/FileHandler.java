@@ -34,6 +34,7 @@ public class FileHandler {
         " size INTEGER, " +
         " firstCorrect INTEGER, " +
         " bestCorrect INTEGER, " +
+        " taken INTEGER, " +
         " firstDate TEXT NOT NULL, " +
         " recentDate TEXT NOT NULL ) " ;
     private static final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -84,19 +85,26 @@ public class FileHandler {
         String load1 = Date.format(Timestamp.from(timestamp.toInstant()));
         String load2 = Time.format(Timestamp.from(timestamp.toInstant()));
 //        System.out.println(lo)
-        String sql = "INSERT INTO Test (id,size,firstCorrect, bestCorrect, firstDate,recentDate) " +"VALUES (" + id + "," + size + "," + correct + "," + correct + ",'" + load1 + "','" + load2 + "')";
+        String sql = "INSERT INTO Test (id,size,firstCorrect, bestCorrect,taken, firstDate,recentDate) " +"VALUES (" + id + "," + size + "," + correct + "," + correct +", "+ 1 + ",'" + load1 + "','" + load2 + "')";
+        String sql2 = "UPDATE Test SET taken = taken + 1, recentDate = '"+ load1 + "' WHERE id = " + id + ";";
+
         try{
             Class.forName("org.sqlite.JDBC");
             Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
             stmt = c.createStatement();
-//            try{
+            try{
                 stmt.executeUpdate(sql);
-//                stmt.execute(sql);
-//            }
-//            catch(Exception e)
-//            {
-//
-//            }
+            }
+            catch(Exception e){
+//                stmt.executeUpdate(sql2);
+
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+            }
+            finally{
+                stmt.executeUpdate(sql2);
+            }
+            
             stmt.close();
             c.close();
         }
@@ -107,7 +115,25 @@ public class FileHandler {
         }
     }
     public static void storeName(){
-        
+        String sql = "INSERT INTO User (name,logins,tests) " +"VALUES ('" + "idries" + "'," + 12 + ",'" + "hi" + "')";
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+            stmt = c.createStatement();
+            try{
+                stmt.executeUpdate(sql);
+            }
+            catch(Exception e){
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+        }
     }
     public static void storeSessionDate(){
 //        Timestamp ts = new Timestamp();
@@ -125,8 +151,28 @@ public class FileHandler {
     }
     public static String grabLastSessionTimeFrom(int month, int date, int year){
         String command = "SELECT name FROM User";
+        String ret = "";
+        try{
+                   Class.forName("org.sqlite.JDBC");
+                   Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+                   stmt = c.createStatement();
+                   try{
+                       ResultSet rs = stmt.executeQuery("SELECT * FROM User;");
+                       ret = rs.getString("name");
+//                       stmt.executeUpdate(command);
+                   }
+                   catch(Exception e){
+                       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                   }
+                   stmt.close();
+                   c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 
-        return "";
+        }
+        return ret;
     }
     public static String grabFirstSessionTimeFrom(int month, int date, int year){
         String command = "SELECT name FROM User";
@@ -138,8 +184,30 @@ public class FileHandler {
         return "";
     }
     public static String grabName(){
-        String command = "SELECT name FROM User";
-        return "";
+        String command = "SELECT * FROM User;";
+        String ret = "";
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+            stmt = c.createStatement();
+            try{
+                ResultSet rs = stmt.executeQuery(command);
+                ret = rs.getString("name");
+                rs.close();
+//                       stmt.executeUpdate(command);
+            }
+            catch(Exception e){
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+        }
+        return ret;
     }
     public static String grabTestTaken(){
         String command = "SELECT tests FROM User";
@@ -205,374 +273,9 @@ public class FileHandler {
     
     public static void main(String[] args) throws IOException{
         initialize();
-        storeTest(0, 1, 10);
-//        System.out.println("database successfully created");
+        storeTest(0, 1, 10);  
+        storeName();
+        System.out.println(grabName());
     }
 }
 
-/**
- * 
-//        if(content == null){
-////        String text = "";
-////        if(file.exists())
-//        try{
-//            file.createNewFile();
-//        }
-//        catch(IOException e){
-//           
-//        }
-//        try {
-//            content = new ArrayList<String>(Files.readAllLines(file.toPath()));
-//        }
-//        catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//
-//            return true;
-//        }
-//        return false;
-//        else{
-//            System.out.println("not empty");
-//            text = text.concat(":name: ;");
-//            try{
-//            PrintWriter out = new PrintWriter(file); 
-//            
-//            
-////                File myFoo = new File("foo.log");
-////FileWriter fooWriter = new FileWriter(myFoo, false); // true to append
-////                                                     // false to overwrite.
-////fooWriter.write("New Contents\n");
-////fooWriter.close();
-//
-//
-////                FileWriter fw = new FileWriter(file);
-////                fw.
-////                fw.write(text);
-////                fw.close();
-//            }
-//            catch (FileNotFoundException e){
-//                
-//            }
-//            return text;
-//        }
-//        return FileHandler.getName(text);
-        }
-*/
-    
-    
-    
-    /** DEPRECATED: SQLite Update
-    public static String getName() throws IOException{
-        if(content != null){
-            try{
-            int startIndex = find("name");
-//            System.out.println("search");
-
-//            System.out.println("");
-            if(startIndex != -1){
-//                            System.out.println("found");
-
-                String text = decrypt(content.get(startIndex));
-                int index =  text.indexOf(":name:")+6;
-                int end = text.indexOf(";",index);
-                String ret = text.substring(index, end);
-
-                StringBuilder titleCase = new StringBuilder();
-                boolean nextTitleCase = true;
-
-                for (char c : ret.toCharArray()) {
-                    if (Character.isSpaceChar(c)) {
-                        nextTitleCase = true;
-                    } else if (nextTitleCase) {
-                        c = Character.toTitleCase(c);
-                        nextTitleCase = false;
-                    }
-
-                    titleCase.append(c);
-                }
-
-                return titleCase.toString();
-            }
-            else{
-                return "";
-            }
-            }
-            finally{
-                
-            }
-        }
-        return "Not Loaded";
-    }
-    
-    //returns the line on the file
-    private static int find(String query) throws IOException{
-//        System.out.println("content Size " + content.size());
-
-        for(int i = 0; i < content.size(); i++){
-            int startIndex = content.get(i).indexOf(":");
-//                    System.out.println("midIndex " + startIndex);
-        
-
-            int midIndex = content.get(i).indexOf(":", startIndex+1);
-//                    System.out.println("midIndex " + midIndex);
-
-//            System.out.println(content.get(i).substring(startIndex, midIndex));
-            if(content.get(i).substring(startIndex, midIndex).contains(encrypt(query)))
-                return i;
-        }
-        return -1;
-    }
-    
-    
-//    private static int findName() throws IOException{
-//        try {
-//            content.
-//        }
-//        catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-        
-//        if(loaded){
-//        try{
-//            ArrayList<String> fileContent = new ArrayList<String>(Files.readAllLines(file.toPath()));
-//            for (int i = 0; i < fileContent.size(); i++) {
-//                int startIndex = content.indexOf(":");
-//                int midIndex = content.indexOf(":", startIndex);
-//            if (fileContent.get(i).equals("old line")) {
-//                fileContent.set(i, "new line");
-//                break;
-//            }
-//        }
-//            Files.write(file.toPath(), fileContent);
-//        }
-//        finally{
-//            
-//        }
-//            int startIndex = content.indexOf(":");
-//            int midIndex = content.indexOf(":", startIndex);
-//
-//            while(startIndex >-1){
-//                String check = content.substring(startIndex, midIndex);
-//                if(FileHandler.decrypt(content.substring(startIndex, midIndex)).contains("name"))
-//                {
-//                    return midIndex+1;
-//                }
-//                startIndex = content.indexOf(":", midIndex);
-//                midIndex = content.indexOf(":", startIndex);
-//            }
-//        }
-//        return -1;
-//        int end = text.indexOf(";",startIndex);
-//        String ret = text.substring(startIndex, end);
-//
-//        StringBuilder titleCase = new StringBuilder();
-//        boolean nextTitleCase = true;
-//
-//        for (char c : ret.toCharArray()) {
-//            if (Character.isSpaceChar(c)) {
-//                nextTitleCase = true;
-//            } else if (nextTitleCase) {
-//                c = Character.toTitleCase(c);
-//                nextTitleCase = false;
-//            }
-//
-//            titleCase.append(c);
-//        }
-//        return titleCase.toString();
-//    }
-    
-    
-    //write by line that way you don't have to do as much work
-    public static void write(String text){
-        try {
-            content.add(encrypt(text));
-            Files.write(file.toPath(), content);
-   
-        } catch (IOException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-
-        
-    
-    public static void overwrite(String text, int index){
-        try{
-//            ArrayList<String> fileContent = new ArrayList<String>(Files.readAllLines(file.toPath()));
-//            for (int i = 0; i < fileContent.size(); i++) {
-//            if (fileContent.get(i).equals("old line")) {
-//                fileContent.set(i, "new line");
-//                break;
-//            }
-            content.set(index, text);
-
-            Files.write(file.toPath(), content);
-        }
-        finally{
-            return;
-        }
-//        List<String> fileContent = new ArrayList<>(Files.readAllLines(FILE_PATH, StandardCharsets.UTF_8));
-//
-//for (int i = 0; i < fileContent.size(); i++) {
-//    if (fileContent.get(i).equals("old line")) {
-//        fileContent.set(i, "new line");
-//        break;
-//    }
-//}
-//
-//Files.write(FILE_PATH, fileContent, StandardCharsets.UTF_8);
-    }
-    
-    public static String setName(String text) throws IOException{
-        if(content != null){
-            try{
-            int startIndex = find("name");
-            if(startIndex!= -1){
-                content.set(startIndex, encrypt(":name:"+text+";"));
-                                        Files.write(file.toPath(), content);
-
-                return "Replaced Name";
-            }
-            else{
-                content.add(encrypt(":name:"+text+";"));
-                                        Files.write(file.toPath(), content);
-
-                return "Loaded Name";
-            }
-
-            }
-            finally{
-                return "NO FILE FOUND?";
-            }
-    }
-    return "File Not Loaded";
-        /**
-//        int startIndex = text.indexOf(":name:") + 6;
-//        int end = text.indexOf(";",startIndex);
-//        String ret = text.substring(startIndex, end);
-//
-//        StringBuilder titleCase = new StringBuilder();
-//        boolean nextTitleCase = true;
-//
-//        for (char c : ret.toCharArray()) {
-//            if (Character.isSpaceChar(c)) {
-//                nextTitleCase = true;
-//            } else if (nextTitleCase) {
-//                c = Character.toTitleCase(c);
-//                nextTitleCase = false;
-//            }
-//
-//            titleCase.append(c);
-//        }
-//        return titleCase.toString();
-//}
-*/
-
- /** SQLite Code
-    Connection c = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.pr
-    ////
-    Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-         System.out.println("Opened database successfully");
-
-         stmt = c.createStatement();
-         String sql = "CREATE TABLE COMPANY " +
-                        "(ID INT PRIMARY KEY     NOT NULL," +
-                        " NAME           TEXT    NOT NULL, " + 
-                        " AGE            INT     NOT NULL, " + 
-                        " ADDRESS        CHAR(50), " + 
-                        " SALARY         REAL)"; 
-         stmt.executeUpdate(sql);
-         stmt.close();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Table created successfully");
-   }
-    
-    ////
-    
-    Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-         c.setAutoCommit(false);
-         System.out.println("Opened database successfully");
-
-         stmt = c.createStatement();
-         String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                        "VALUES (1, 'Paul', 32, 'California', 20000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         stmt.close();
-         c.commit();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Records created successfully");Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-         c.setAutoCommit(false);
-         System.out.println("Opened database successfully");
-
-         stmt = c.createStatement();
-         String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                        "VALUES (1, 'Paul', 32, 'California', 20000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-                  "VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"; 
-         stmt.executeUpdate(sql);
-
-         stmt.close();
-         c.commit();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Records created successfully");
-    
-    */
