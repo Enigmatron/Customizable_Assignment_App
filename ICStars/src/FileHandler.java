@@ -31,7 +31,7 @@ public class FileHandler {
         "logins INTEGER) ";
     private static final String testData = "CREATE TABLE Test"+
         "(id INTEGER PRIMARY KEY," +
-        " size INTEGERL, " +
+        " size INTEGER, " +
         " firstCorrect INTEGER, " +
         " bestCorrect INTEGER, " +
         " firstDate TEXT NOT NULL, " +
@@ -83,8 +83,28 @@ public class FileHandler {
 
         String load1 = Date.format(Timestamp.from(timestamp.toInstant()));
         String load2 = Time.format(Timestamp.from(timestamp.toInstant()));
-        
-        String sql = "INSERT INTO Tests (id,grade,date) " +"VALUES ('" + id + "'," + size + "'," + correct + ")";
+//        System.out.println(lo)
+        String sql = "INSERT INTO Test (id,size,firstCorrect, bestCorrect, firstDate,recentDate) " +"VALUES (" + id + "," + size + "," + correct + "," + correct + ",'" + load1 + "','" + load2 + "')";
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+            stmt = c.createStatement();
+//            try{
+                stmt.executeUpdate(sql);
+//                stmt.execute(sql);
+//            }
+//            catch(Exception e)
+//            {
+//
+//            }
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+        }
     }
     public static void storeName(){
         
@@ -185,6 +205,7 @@ public class FileHandler {
     
     public static void main(String[] args) throws IOException{
         initialize();
+        storeTest(0, 1, 10);
 //        System.out.println("database successfully created");
     }
 }
