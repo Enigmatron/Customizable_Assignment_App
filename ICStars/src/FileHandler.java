@@ -180,6 +180,8 @@ public class FileHandler {
         return "";
     }
     public static String grabSessionDate(int month, int date, int year){
+        SimpleDateFormat Date = new SimpleDateFormat("MM-dd-yyyy");
+
         String command = "SELECT name FROM User";
         return "";
     }
@@ -209,12 +211,55 @@ public class FileHandler {
         }
         return ret;
     }
-    public static String grabTestTaken(){
-        String command = "SELECT tests FROM User";
-        return "";
+    public static int grabTestTaken(){
+        String command = "SELECT * FROM User";
+        int ret = 0;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+            stmt = c.createStatement();
+            try{
+                ResultSet rs = stmt.executeQuery(command);
+                ret = rs.getInt("tests");
+                rs.close();
+//                       stmt.executeUpdate(command);
+            }
+            catch(Exception e){
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+        }
+        return ret;
     }
-    public static String grabTestInfo(){
-        return "";
+    public static ResultSet grabTestInfo(int id){
+        String command = "SELECT * FROM Test";
+        ResultSet ret = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
+            stmt = c.createStatement();
+            try{
+                ret = stmt.executeQuery(command);
+                ret.close();
+            }
+            catch(Exception e){
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+            stmt.close();
+            c.close();
+        }
+        catch(Exception e)
+        {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+
+        }
+        return ret;
     }
     
     public static class Encrypter{
