@@ -24,13 +24,13 @@ public class Menu extends javax.swing.JPanel {
      */
     public Menu(){
         initComponents();
-            try {
-                FileHandler.LoadFile();
-                            jLabel1.setText(FileHandler.getName());
-
-            } catch (IOException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                FileHandler.LoadFile();
+//                            jLabel1.setText(FileHandler.getName());
+//
+//            } catch (IOException ex) {
+//                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+//            }
 //        
     }
 //    void addItem(String word) {

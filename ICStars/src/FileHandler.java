@@ -8,33 +8,66 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
 //has a Alphabet-Number ceasar cipher; and has the ability to function with whitespaces and exclusionationary characters
 public class FileHandler {   
     //Database Creation Variables
     private static final File file = new File(System.getProperty("user.home")+"/icstars/");
     private static Statement stmt = null;
     private static Connection c = null;
-    private static final String applicationData = "CREATE TABLE User";
+    private static final String userData = "CREATE TABLE User"+
+        "(name TEXT PRIMARY KEY ," +
+        " logins INTEGER NOT NULL, " +
+        " tests INTEGER NOT NULL) ";
+
     private static final String loginData = "CREATE TABLE Login"+
-        "(id INTEGER PRIMARY KEY ," +
-        " size INTEGER NOT NULL, " +
-        " correct INTEGER NOT NULL, " +
-        " date Date, " +
-        " time Time ) " ;
-
-
-        
-    private static final String testData = "CREATE TABLE Test";
+        "(date TEXT PRIMARY KEY ," +
+        "firstLogin TEXT ," +
+        "recentLogin TEXT, " +
+        "logins INTEGER) ";
+    private static final String testData = "CREATE TABLE Test"+
+        "(id INTEGER PRIMARY KEY," +
+        " size INTEGERL, " +
+        " firstCorrect INTEGER, " +
+        " bestCorrect INTEGER, " +
+        " firstDate TEXT NOT NULL, " +
+        " recentDate TEXT NOT NULL ) " ;
+    private static final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     public static boolean initialize() throws IOException{
         c = null;
 
         try {
+            
+            file.mkdir();
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite::resource:package/test.sqlite"); 
+            Connection c = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
             stmt = c.createStatement();
+            try{
+            stmt.execute(testData);
+            }
+            catch ( Exception e ) {
+                
+            }
+            try{
+            stmt.execute(userData);
+            }
+            catch ( Exception e ) {
+                
+            }
+            try{
+            stmt.execute(loginData);
+            }
+            catch ( Exception e ) {
+            
+            }
+
+            stmt.close();
+            c.close();
         }
         catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -45,24 +78,54 @@ public class FileHandler {
         return true;
     }
     public static void storeTest(int id, int size, int correct){
-        String sql = "INSERT INTO Tests (id,grade,month,day,year) " +"VALUES ('" + id + "'," + size + "'," + correct + ")";
+        SimpleDateFormat Date = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat Time = new SimpleDateFormat("HH:mm.ss");
+
+        String load1 = Date.format(Timestamp.from(timestamp.toInstant()));
+        String load2 = Time.format(Timestamp.from(timestamp.toInstant()));
+        
+        String sql = "INSERT INTO Tests (id,grade,date) " +"VALUES ('" + id + "'," + size + "'," + correct + ")";
     }
     public static void storeName(){
         
     }
     public static void storeSessionDate(){
+//        Timestamp ts = new Timestamp();
+//        Date date = new Date();
+//        date.setTime(ts.getTime());
+        SimpleDateFormat Date = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat Time = new SimpleDateFormat("HH:mm.ss");
+
+        String load1 = Date.format(Timestamp.from(timestamp.toInstant()));
+        String load2 = Time.format(Timestamp.from(timestamp.toInstant()));
+
         
+        
+        String updateUserInfo = "UPDATE User SET name = SELECT COUNT(*) FROM Login;";
     }
-    public static String grabLastSessionDate(){
+    public static String grabLastSessionTimeFrom(int month, int date, int year){
+        String command = "SELECT name FROM User";
+
+        return "";
+    }
+    public static String grabFirstSessionTimeFrom(int month, int date, int year){
+        String command = "SELECT name FROM User";
+
         return "";
     }
     public static String grabSessionDate(int month, int date, int year){
+        String command = "SELECT name FROM User";
         return "";
     }
     public static String grabName(){
+        String command = "SELECT name FROM User";
         return "";
     }
-    public static String grabTests(){
+    public static String grabTestTaken(){
+        String command = "SELECT tests FROM User";
+        return "";
+    }
+    public static String grabTestInfo(){
         return "";
     }
     
@@ -121,21 +184,8 @@ public class FileHandler {
     
     
     public static void main(String[] args) throws IOException{
-//        LoadFile();
-//        String test2 = getName();
-        Connection c = null;
-//        File dir;
-        try {
-            file.mkdir();
-            Class.forName("org.sqlite.JDBC");
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + System.getProperty("user.home")+"/icstars/" + "mydatabase.db");
-        }
-
-        catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("database successfully created");
+        initialize();
+//        System.out.println("database successfully created");
     }
 }
 

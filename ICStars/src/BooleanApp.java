@@ -92,7 +92,7 @@ public class BooleanApp {
         String name = "";
         try{
             FileHandler.initialize();
-            name = FileHandler.initialize(); 
+//            name = FileHandler.initialize(); 
 //            System.out.println(name);
             if(name.equals("")){
             frame.getContentPane().add(new WelcomeWindow());
