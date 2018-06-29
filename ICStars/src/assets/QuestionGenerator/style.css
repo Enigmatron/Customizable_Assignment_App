@@ -8,6 +8,36 @@ and open the template in the editor.
     Author     : idrieskysia
 */
 
+
+
+
+.lineNumber{
+    background-color: #eae3cb;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+
+}
+table{ 
+    border-spacing: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    
+}
+
+
+
+tr{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+.lineNumber:hover{
+    color: red;
+    cursor: pointer;
+
+    background-color: lightblue;
+}
+
 .word{
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -18,11 +48,14 @@ and open the template in the editor.
                                   supported by Chrome and Opera */
 }
 
-
-.word mutable{
-    /*color: red;*/
-    /*cursor: pointer;*/
+.genericMutable:hover{
+    cursor: pointer;
+    background-color: lightblue;
 }
+/*.word{
+    color: red;
+    cursor: pointer;
+}*/
 .word.mutableWord:hover{
     color: red;
     cursor: pointer;

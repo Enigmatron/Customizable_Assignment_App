@@ -16,9 +16,32 @@ and open the template in the editor.
         <FORM NAME="form1" ACTION="TestStoreProcedure.jsp" METHOD="POST">
         <table>
             <tr>
-                <td class="word mutableWord"> hi</td>
-                <td class="word"> hi</td>
-                <td class="word"> hi</td>
+                <!--connect the lineNumber square all the way down-->
+                <td class="lineNumber"> 1</td>
+                <td class="genericMutable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <!--add a block of space here in the table-->
+                <td class="word mutableWord"> hi&nbsp;</td>
+                <td class="word"> theLongerTester&nbsp;</td>
+                <td class="word"> thetinytest&nbsp;</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="lineNumber"> 2</td>
+                <td class="word mutableWord"> theLongerTester&nbsp;</td>
+                <td class="word mutableWord"> &lt;hi&gt;&nbsp;</td>
+                    <td class="word"> this is fake code</td>
+                <td class="word mutableWord"> &lt;/hi&gt&nbsp;</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="lineNumber"> 3</td>
+                <td class="word mutableWord"> hi&nbsp;</td>
+                <td class="word"> hi&nbsp;</td>
+                <td class="word"> hi&nbsp;</td>
             </tr>
         </table>
         </FORM>
