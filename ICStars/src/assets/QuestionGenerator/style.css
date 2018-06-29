@@ -1,0 +1,31 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 29, 2018, 11:33:14 AM
+    Author     : idrieskysia
+*/
+
+.word{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;/* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+
+.word mutable{
+    /*color: red;*/
+    /*cursor: pointer;*/
+}
+.word.mutableWord:hover{
+    color: red;
+    cursor: pointer;
+
+    background-color: lightblue;
+}
