@@ -22,16 +22,16 @@ public class LessonWindow extends javax.swing.JPanel {
      * Creates new form LessonWindow
      */
     
-        private static final File file = new File("C:\\ICStars\\lesson.txt");
+        private static final File file = new File("src/assets/QuestionGenerator/example/ExampleTestView.html");
 
     public LessonWindow() {
         initComponents(); 
         
          try{
-            file.createNewFile();
+//            file.createNewFile();
             Scanner in = new Scanner(file);
 //            String text = "";
-StringBuilder text = new StringBuilder();
+            StringBuilder text = new StringBuilder();
             jTextPane1.setContentType("text/html");
 
             while(in.hasNext())
@@ -40,7 +40,7 @@ StringBuilder text = new StringBuilder();
                 
         }
         catch(IOException e){
-           
+           System.err.print("didnt happen");
         }
         
         //jTextArea1.setText("THIS IS A TEST FOR SANITY, ARE YOU AWAKE?");
@@ -85,8 +85,7 @@ StringBuilder text = new StringBuilder();
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(23, 23, 23))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,11 +94,9 @@ StringBuilder text = new StringBuilder();
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jButton1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 53, Short.MAX_VALUE))

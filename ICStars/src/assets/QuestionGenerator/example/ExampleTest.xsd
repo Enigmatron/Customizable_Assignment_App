@@ -16,7 +16,8 @@ and open the template in the editor.
         answer this.
     </description>
     <line error="1">
-        <word>error</word>
-        <word>truth</word>
+        <word M="T">error</word>
+        <word M="T">truth</word>
+        
     </line>
 </question>>
