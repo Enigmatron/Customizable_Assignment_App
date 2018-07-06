@@ -71,22 +71,10 @@ public class TestTaker2 extends javax.swing.JPanel {
     }
     private static final String TEST_RESOURCE_NAME = "/assets/QuestionGenerator/example/ExampleTestView.html";
     private void createScene() {
-//        browser.getStylesheets().add("/assets/QuestionGenerator/style.css");
-//        webEngine.loadContent("assets/QuestionGenerator/example/ExampleTestView.html");
-//        Scene sc = new Scene(browser, Color.web("#666970"));
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
         URL url = TestTaker2.class.getResource(TEST_RESOURCE_NAME);
         webEngine.load(url.toExternalForm());
-//        Button btn = new Button();
-//        btn.setText("Say 'Hello World'");
-//        btn.setOnAction(new EventHandler<ActionEvent>() {
-//            
-//            @Override
-//            public void handle(ActionEvent event) {
-//                System.out.println("Hello World!");
-//            }
-//        });
         StackPane root = new StackPane();
         root.getChildren().add(browser);
         jFXPanel1.setScene(new Scene(root));
@@ -112,33 +100,22 @@ public class TestTaker2 extends javax.swing.JPanel {
 
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jFXPanel1 = new javafx.embed.swing.JFXPanel();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Banner1.png"))); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/FalseButton.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                False(evt);
-            }
-        });
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/True Button.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-                True(evt);
-            }
-        });
-
         jFXPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton3.setFont(new java.awt.Font("Righteous", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/GenericButton.png"))); // NOI18N
+        jButton3.setText("Submit");
+        jButton3.setBorder(null);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,19 +123,16 @@ public class TestTaker2 extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addGap(0, 270, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton2)
-                        .addGap(121, 121, 121)
-                        .addComponent(jButton1))
-                    .addComponent(jFXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jFXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,57 +140,22 @@ public class TestTaker2 extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jFXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
-                        .addContainerGap(33, Short.MAX_VALUE))))
+                        .addComponent(jFXPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(25, 25, 25))))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void False(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_False
-//        // TODO add your handling code here:
-//        answers.add(index, new Boolean(false));
-//        if(index < questions.size()-1){
-//        index +=1;
-//        ReLabel();
-//        }
-//        else{
-////            BooleanApp.swapToMenu();
-//                BooleanApp.swapToTestResults(questions, answers);
-//        }
-    }//GEN-LAST:event_False
-
-    private void True(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_True
-//        // TODO add your handling code here:
-//        answers.add(index, new Boolean(true));
-//        if(index < questions.size()-1){
-//
-//            index +=1;
-//            ReLabel();
-//        }
-//        else{
-////            BooleanApp.swapToMenu();
-//                BooleanApp.swapToTestResults(questions, answers);
-//
-//        }
-    }//GEN-LAST:event_True
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javafx.embed.swing.JFXPanel jFXPanel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;

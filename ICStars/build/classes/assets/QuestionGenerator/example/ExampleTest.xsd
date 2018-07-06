@@ -10,14 +10,25 @@ and open the template in the editor.
            elementFormDefault="qualified">
 
 </xs:schema>
-<question>
-    <description>
-        this is an example question <bold> you do not</bold>
-        answer this.
-    </description>
-    <line error="1">
-        <word M="T">error</word>
-        <word M="T">truth</word>
+<container>
+    <question no="1">
+        <description>
+            this is an example question <bold> you do not</bold>
+            answer this.
+        </description>
+        <line error="1">
+            <word M="T">error</word>
+            <word M="T">truth</word>
+
+        </line>
+        <line error="1">
+            <word M="T">error</word>
+            <word M="T">truth</word>
+
+        </line>
         
-    </line>
-</question>>
+    </question>
+    
+    
+    
+</container>

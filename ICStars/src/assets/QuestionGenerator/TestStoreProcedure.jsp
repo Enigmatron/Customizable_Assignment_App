@@ -13,6 +13,9 @@ package assets.QuestionGenerator;
  <%
 package assets.QuestionGenerator;
 
+public void test(){
+    BooleanApp.test();
+}
 
 
 

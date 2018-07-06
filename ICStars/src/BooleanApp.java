@@ -68,7 +68,9 @@ public class BooleanApp {
         frame.setVisible(true);
         frame.validate();
     }
-    
+    public static void test(){
+    System.out.println("Test");
+    }
     static Screen screen = Screen.MENU;
 //    StringBuffer strBuffer;
     static JFrame frame = new JFrame("Boolean Teacher");
