@@ -1,6 +1,7 @@
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.net.URL;
 import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -31,8 +32,9 @@ public class TestTaker2 extends javax.swing.JPanel {
 //    private static JFXPanel fxContainer;
     private static int JFXPANEL_WIDTH_INT = 300;
     private static int JFXPANEL_HEIGHT_INT = 250;
-    final WebView browser = new WebView();
-    final WebEngine webEngine = browser.getEngine();
+//    final WebView browser = new WebView();
+//    final WebEngine webEngine = browser.getEngine();
+     
     /**
      * Creates new form TestTaker
      */
@@ -52,10 +54,10 @@ public class TestTaker2 extends javax.swing.JPanel {
 //        add(jFXPanel1, BorderLayout.CENTER);
 //        final WebView browser = new WebView();
 //        final WebEngine webEngine = browser.getEngine();
-        browser.getStylesheets().add("assets/QuestionGenerator/style.css");
-        webEngine.load("assets/QuestionGenerator/example/ExampleTestView.html");
-        Scene sc = new Scene(browser, Color.web("#666970"));
-        jFXPanel1.setScene(sc);
+//        browser.getStylesheets().add("assets/QuestionGenerator/style.css");
+//        webEngine.load("assets/QuestionGenerator/example/ExampleTestView.html");
+//        Scene sc = new Scene(browser, Color.web("#666970"));
+//        jFXPanel1.setScene(sc);
 //        browser.getStylesheets().add("webviewsample/BrowserToolbar.css");
         Platform.runLater(new Runnable() {
             
@@ -67,19 +69,26 @@ public class TestTaker2 extends javax.swing.JPanel {
         ReLabel();
         
     }
-    
+    private static final String TEST_RESOURCE_NAME = "/assets/QuestionGenerator/example/ExampleTestView.html";
     private void createScene() {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+//        browser.getStylesheets().add("/assets/QuestionGenerator/style.css");
+//        webEngine.loadContent("assets/QuestionGenerator/example/ExampleTestView.html");
+//        Scene sc = new Scene(browser, Color.web("#666970"));
+        WebView browser = new WebView();
+        WebEngine webEngine = browser.getEngine();
+        URL url = TestTaker2.class.getResource(TEST_RESOURCE_NAME);
+        webEngine.load(url.toExternalForm());
+//        Button btn = new Button();
+//        btn.setText("Say 'Hello World'");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+//            
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println("Hello World!");
+//            }
+//        });
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.getChildren().add(browser);
         jFXPanel1.setScene(new Scene(root));
     }
     
