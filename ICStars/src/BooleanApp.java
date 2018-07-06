@@ -45,13 +45,13 @@ public class BooleanApp {
     }
     public static void swapToTest(int num){
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(new TestTaker(num));
+        frame.getContentPane().add(new TestTaker2(num));
         frame.setVisible(true);
         frame.validate();
     }
     public static void swapToTest(){
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(new TestTaker());
+        frame.getContentPane().add(new TestTaker2());
         frame.setVisible(true);
         frame.validate();
     }
