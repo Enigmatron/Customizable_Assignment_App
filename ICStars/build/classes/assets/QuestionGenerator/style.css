@@ -11,11 +11,11 @@ and open the template in the editor.
 
 
 
-.lineNumber{
+.lineNumber {
     background-color: #eae3cb;
     margin-bottom: 0px;
     padding-bottom: 0px;
-
+    color:rgba(77, 92, 160,1.0);
 }
 table{ 
     border-spacing: 0;
@@ -26,8 +26,24 @@ table{
 
 td{
     padding: 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*border-bottom: 2px solid #f00;*/
+    /*background: #00f;*/
+    margin-bottom: 1px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
 }
-
+td + td {
+    /*border: 1px solid red;*/
+}
 tr{
     margin: 0;
     padding-bottom: 0;
@@ -40,27 +56,37 @@ tr{
     background-color: lightblue;
 }
 
-.word{
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;/* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
+/*.word{
+    -webkit-touch-callout: none;  iOS Safari 
+    -webkit-user-select: none;  Safari 
+     -khtml-user-select: none;  Konqueror HTML 
+       -moz-user-select: none;  Firefox 
+        -ms-user-select: none;  Internet Explorer/Edge 
+            user-select: none; Non-prefixed version, currently
+                                  supported by Chrome and Opera 
+}*/
 
-.genericMutable:hover{
+.mutable:hover{
     cursor: pointer;
     background-color: lightblue;
+    color: red;
+
+}
+.mutable {
+    /*color: #394060;*/
+    color:rgba(77, 92, 160,1.0);
+    border-bottom-color: rgba(77, 92, 160,1.0);
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+
 }
 /*.word{
     color: red;
     cursor: pointer;
 }*/
-.word.mutableWord:hover{
+/*.word:hover{
     color: red;
     cursor: pointer;
 
     background-color: lightblue;
-}
+}*/

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!--<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+</xs:schema>-->
+    <question no="1">
+        <description>this is an example question you do not answer this.</description>
+        <line>   error is a boolean and count is just that 
+            
+            <error>error</error>  
+            <word>truth</word>
+            <edict>truth</edict>
+
+
+        </line>
+        <line>
+            <error>error</error>
+            <error>error</error>
+        </line>
+        <line>
+            <word>truth</word>
+            <word>truth</word>
+        </line>
+        
+    </question>
