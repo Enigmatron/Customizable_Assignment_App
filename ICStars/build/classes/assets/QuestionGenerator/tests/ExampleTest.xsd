@@ -13,12 +13,9 @@ and open the template in the editor.
     <question no="1">
         <description>this is an example question you do not answer this.</description>
         <line>   error is a boolean and count is just that 
-            
             <error>error</error>  
             <word>truth</word>
             <edict>truth</edict>
-
-
         </line>
         <line>
             <error>error</error>
